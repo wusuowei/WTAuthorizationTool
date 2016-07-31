@@ -1,0 +1,6 @@
+framework module WTAlert {
+  umbrella header "WTAlert-umbrella.h"
+
+  export *
+  module * { export * }
+}

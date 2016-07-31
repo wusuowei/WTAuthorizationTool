@@ -1,0 +1,6 @@
+framework module WTAuthorizationTool {
+  umbrella header "WTAuthorizationTool-umbrella.h"
+
+  export *
+  module * { export * }
+}

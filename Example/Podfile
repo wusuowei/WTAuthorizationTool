@@ -1,14 +1,15 @@
 use_frameworks!
 
-target 'WTAuthorizationTool_Example' do
-  pod 'WTAuthorizationTool', :path => '../'
+target 'WTAuthorizationTool_Example', :exclusive => true do
+	pod 'WTAuthorizationTool', :path => '../'
+    pod 'WTAlert'
+end
 
-  target 'WTAuthorizationTool_Tests' do
-    inherit! :search_paths
-
-    pod 'Specta'
-  pod 'Expecta'
-  pod 'FBSnapshotTestCase'
-  pod 'Expecta+Snapshots'
-  end
+target 'WTAuthorizationTool_Tests', :exclusive => true do
+	pod 'WTAuthorizationTool', :path => '../'
+	
+	pod 'Specta'
+	pod 'Expecta'
+	pod 'FBSnapshotTestCase'
+	pod 'Expecta+Snapshots'
 end
