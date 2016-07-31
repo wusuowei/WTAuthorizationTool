@@ -8,6 +8,6 @@
 
 @import UIKit;
 
-@interface WTViewController : UIViewController
+@interface WTViewController : UITableViewController
 
 @end

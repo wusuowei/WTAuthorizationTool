@@ -12,6 +12,9 @@
 
 @interface WTViewController ()
 
+@property (nonatomic, copy) NSArray *testList;
+
+
 @end
 
 @implementation WTViewController
@@ -19,6 +22,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.testList = @[@"获取相机权限",
+                      @"获取相册权限",
+                      @"获取通讯录权限"];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -33,6 +39,12 @@
 
 - (void)requestCamera {
     [WTAuthorizationTool requestCameraAuthorization:^(WTAuthorizationStatus status) {
+        [self requestAuthCallback:status];
+    }];
+}
+
+- (void)requestAlbum {
+    [WTAuthorizationTool requestImagePickerAuthorization:^(WTAuthorizationStatus status) {
         [self requestAuthCallback:status];
     }];
 }
@@ -70,6 +82,29 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+#pragma mark - UITableView
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.testList.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    static NSString *reuseId = @"WTAuthTestCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId forIndexPath:indexPath];
+    cell.textLabel.text = self.testList[indexPath.row];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 0) {
+        [self requestCamera];
+    } else if (indexPath.row == 1) {
+        [self requestAlbum];
+    } else if (indexPath.row == 2) {
+        [self requestAddressBook];
+    }
 }
 
 @end
