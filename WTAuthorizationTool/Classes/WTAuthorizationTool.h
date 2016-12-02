@@ -15,19 +15,25 @@ typedef NS_ENUM(NSUInteger, WTAuthorizationStatus) {
     WTAuthorizationStatusNotSupport         // 硬件等不支持
 };
 
+
+
+
+/**
+ 全部采用类方法，不会因为此处代码带来循环引用
+ */
 @interface WTAuthorizationTool : NSObject
 
 /**
  *  请求相册访问权限
  *
- *  @param callback <#callback description#>
+ *  @param callback 授权回调
  */
 + (void)requestImagePickerAuthorization:(void(^)(WTAuthorizationStatus status))callback;
 
 /**
  *  请求相机权限
  *
- *  @param callback <#callback description#>
+ *  @param callback 授权回调
  */
 + (void)requestCameraAuthorization:(void(^)(WTAuthorizationStatus status))callback;
 
